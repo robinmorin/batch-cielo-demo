@@ -31,11 +31,6 @@ public class JobInfoProcess {
         return new ReaderInfoProcess(filePath,hasHeader);
     }
 
-//    @Bean
-//    public ItemProcessor<InfoRecordFile, InfoProcess> processor(){
-//        return null;
-//    }
-
     @Bean(name = "mainJob")
     public Job job(JobRepository jobRepository, @Qualifier("mainStep") Step step) {
         return new JobBuilder("mainJob")
@@ -45,17 +40,20 @@ public class JobInfoProcess {
                 .build();
     }
 
-
     @Bean(name = "mainStep")
-    public Step step1(JobRepository jobRepository, PlatformTransactionManager transactionManager, ItemReader<InfoRecordFile> reader,
-                         ItemProcessor<InfoRecordFile, InfoProcess> processor, ItemWriter<InfoProcess> writer) {
+    public Step step1(JobRepository jobRepository,
+                      @Qualifier("jpaTrxMgmt") PlatformTransactionManager transactionManager,
+                      ItemReader<InfoRecordFile> reader,
+                      ItemProcessor<InfoRecordFile, InfoProcess> processor,
+                      ItemWriter<InfoProcess> writer) {
         return new StepBuilder("mainStep").
                 <InfoRecordFile,InfoProcess> chunk(2)
                 .reader(reader)
                 .processor(processor)
                 .writer(writer)
                 .repository(jobRepository)
-                .transactionManager(transactionManager).build();
+                .transactionManager(transactionManager)
+                .build();
     }
 
 

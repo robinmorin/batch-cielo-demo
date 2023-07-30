@@ -7,8 +7,10 @@ import org.springframework.batch.core.repository.JobRepository;
 import org.springframework.batch.core.repository.support.JobRepositoryFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.PlatformTransactionManager;
 
+import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 @Configuration
@@ -31,6 +33,11 @@ public class BeanConfiguration {
         jobLauncher.setJobRepository(jobRepository);
         jobLauncher.afterPropertiesSet();
         return jobLauncher;
+    }
+
+    @Bean(name = "jpaTrxMgmt")
+    public JpaTransactionManager transactionManager(EntityManagerFactory entityManagerFactory){
+        return new JpaTransactionManager(entityManagerFactory);
     }
 
 }
