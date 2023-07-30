@@ -1,6 +1,7 @@
 package com.example.batchcielodemo.jobs;
 
 import com.example.batchcielodemo.entities.InfoProcess;
+import com.example.batchcielodemo.listeners.*;
 import com.example.batchcielodemo.models.InfoRecordFile;
 import com.example.batchcielodemo.readers.ReaderInfoProcess;
 import org.springframework.batch.core.Job;
@@ -36,6 +37,7 @@ public class JobInfoProcess {
         return new JobBuilder("mainJob")
                 .repository(jobRepository)
                 .preventRestart()
+                .listener(new JobExecListener())
                 .start(step)
                 .build();
     }
@@ -53,6 +55,10 @@ public class JobInfoProcess {
                 .writer(writer)
                 .repository(jobRepository)
                 .transactionManager(transactionManager)
+                .listener(new StepExecListener())
+                .listener(new ReadExecListener())
+                .listener(new ProcessExecListener())
+                .listener(new WriteExecListener())
                 .build();
     }
 
