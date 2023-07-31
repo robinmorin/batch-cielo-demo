@@ -13,6 +13,11 @@ Para rodar esse projeto, precisa de duas variáveis de ambiente.
 
 `PROCESS_FILE_HAS_HEADER` para definir se o arquivo possui header
 
+## Stack utilizada
+
+- Java 17 (execução compatível com Java 11)
+- Spring Batch 2.7 
+- Apache Maven 3.8
 
 ## Rodando localmente
 
