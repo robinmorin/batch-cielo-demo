@@ -21,10 +21,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 public class JobInfoProcess {
 
-    @Value("#{systemProperties['process.file.path']}")
+    @Value("#{systemProperties['PROCESS_FILE_PATH']}")
     private String filePath;
 
-    @Value("#{systemProperties['process.file.has.header']}")
+    @Value("#{systemProperties['PROCESS_FILE_HAS_HEADER']}")
     private Boolean hasHeader;
 
     @Bean

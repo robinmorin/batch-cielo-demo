@@ -20,8 +20,8 @@ public class BatchCieloDemoApplication {
 	private JobLauncher jobLauncher;
 
 	public static void main(String[] args) {
-		System.setProperty("process.file.path","fileInfo.csv");
-		System.setProperty("process.file.has.header","true");
+		System.setProperty("PROCESS_FILE_PATH","fileInfo.csv");
+		System.setProperty("PROCESS_FILE_HAS_HEADER","true");
 		SpringApplication.run(BatchCieloDemoApplication.class, args);
 	}
 
